@@ -1,198 +1,91 @@
-const brailleToKana = {
-  "1": "あ", "12": "い", "14": "う", "124": "え", "24": "お",
-  "16": "か", "126": "き", "146": "く", "1246": "け", "246": "こ",
-  "156": "さ", "1256": "し", "1456": "す", "12456": "せ", "2456": "そ",
-  "135": "た", "1235": "ち", "1345": "つ", "12345": "て", "2345": "と",
-  "13": "な", "123": "に", "134": "ぬ", "1234": "ね", "234": "の",
-  "136": "は", "1236": "ひ", "1346": "ふ", "12346": "へ", "2346": "ほ",
-  "1356": "ま", "12356": "み", "13456": "む", "123456": "め", "23456": "も",
-  "34": "や", "346": "ゆ", "345": "よ",
-  "15": "ら", "125": "り", "145": "る", "1245": "れ", "245": "ろ",
-  "3": "わ", "35": "を", "356": "ん"
+const brailleMap = {
+  "あ": "1",
+  "い": "12",
+  "う": "14",
+  "え": "124",
+  "お": "24",
+
+  "か": "16",
+  "き": "126",
+  "く": "146",
+  "け": "1246",
+  "こ": "246",
+
+  "さ": "156",
+  "し": "1256",
+  "す": "1456",
+  "せ": "12456",
+  "そ": "2456",
+
+  "た": "15",
+  "ち": "125",
+  "つ": "145",
+  "て": "1245",
+  "と": "245",
+
+  "な": "135",
+  "に": "1235",
+  "ぬ": "1345",
+  "ね": "13456",
+  "の": "3456",
+
+  "は": "136",
+  "ひ": "1236",
+  "ふ": "1346",
+  "へ": "12346",
+  "ほ": "346",
+
+  "ま": "1356",
+  "み": "12356",
+  "む": "13456",
+  "め": "2456",
+  "も": "356",
+
+  "や": "34",
+  "ゆ": "346",
+  "よ": "35",
+
+  "ら": "123",
+  "り": "1235",
+  "る": "1236",
+  "れ": "12356",
+  "ろ": "135",
+
+  "わ": "245",
+  "を": "125",
+  "ん": "356",
+
+  // 拗音
+  "きゃ": "126-34",
+  "きゅ": "126-346",
+  "きょ": "126-35",
+
+  "しゃ": "1256-34",
+  "しゅ": "1256-346",
+  "しょ": "1256-35",
+
+  "ちゃ": "125-34",
+  "ちゅ": "125-346",
+  "ちょ": "125-35"
 };
 
-const dotsToBrailleChar = {
-  "1": "⠁", "12": "⠃", "14": "⠉", "124": "⠋", "24": "⠊",
-  "16": "⠡", "126": "⠣", "146": "⠩", "1246": "⠫", "246": "⠪",
-  "156": "⠱", "1256": "⠳", "1456": "⠹", "12456": "⠻", "2456": "⠺",
-  "135": "⠕", "1235": "⠗", "1345": "⠝", "12345": "⠟", "2345": "⠞",
-  "13": "⠅", "123": "⠇", "134": "⠍", "1234": "⠏", "234": "⠎",
-  "136": "⠥", "1236": "⠧", "1346": "⠭", "12346": "⠯", "2346": "⠮",
-  "1356": "⠵", "12356": "⠷", "13456": "⠽", "123456": "⠿", "23456": "⠾",
-  "34": "⠌", "346": "⠬", "345": "⠜",
-  "15": "⠑", "125": "⠓", "145": "⠙", "1245": "⠛", "245": "⠚",
-  "3": "⠄", "35": "⠔", "356": "⠴",
+function convertToBraille() {
+  const input = document.getElementById("hiraganaInput").value;
+  let result = [];
 
-  "4": "⠈",
-  "5": "⠐",
-  "6": "⠠"
-};
+  for (let i = 0; i < input.length; i++) {
 
-const kanaToBraille = Object.fromEntries(
-  Object.entries(brailleToKana).map(([dots, kana]) => [kana, dots])
-);
+    // 2文字確認
+    const twoChars = input[i] + input[i + 1];
 
-const dakutenMap = {
-  "か": "が", "き": "ぎ", "く": "ぐ", "け": "げ", "こ": "ご",
-  "さ": "ざ", "し": "じ", "す": "ず", "せ": "ぜ", "そ": "ぞ",
-  "た": "だ", "ち": "ぢ", "つ": "づ", "て": "で", "と": "ど",
-  "は": "ば", "ひ": "び", "ふ": "ぶ", "へ": "べ", "ほ": "ぼ"
-};
+    if (brailleMap[twoChars]) {
+      result.push(brailleMap[twoChars]);
+      i++;
+    } else {
+      result.push(brailleMap[input[i]] || "?");
+    }
+  }
 
-const handakutenMap = {
-  "は": "ぱ", "ひ": "ぴ", "ふ": "ぷ", "へ": "ぺ", "ほ": "ぽ"
-};
-
-const youonMap = {
-  "か": "きゃ", "く": "きゅ", "こ": "きょ",
-  "さ": "しゃ", "す": "しゅ", "そ": "しょ",
-  "た": "ちゃ", "つ": "ちゅ", "と": "ちょ",
-  "な": "にゃ", "ぬ": "にゅ", "の": "にょ",
-  "は": "ひゃ", "ふ": "ひゅ", "ほ": "ひょ",
-  "ま": "みゃ", "む": "みゅ", "も": "みょ",
-  "ら": "りゃ", "る": "りゅ", "ろ": "りょ"
-};
-
-const dakuYouonMap = {
-  "か": "ぎゃ", "く": "ぎゅ", "こ": "ぎょ",
-  "さ": "じゃ", "す": "じゅ", "そ": "じょ",
-  "た": "ぢゃ", "つ": "ぢゅ", "と": "ぢょ",
-  "は": "びゃ", "ふ": "びゅ", "ほ": "びょ"
-};
-
-const handakuYouonMap = {
-  "は": "ぴゃ", "ふ": "ぴゅ", "ほ": "ぴょ"
-};
-
-const voicedKanaToBase = Object.fromEntries(
-  Object.entries(dakutenMap).map(([base, voiced]) => [voiced, base])
-);
-
-const handakutenKanaToBase = Object.fromEntries(
-  Object.entries(handakutenMap).map(([base, semi]) => [semi, base])
-);
-
-const youonKanaToBase = Object.fromEntries(
-  Object.entries(youonMap).map(([base, youon]) => [youon, base])
-);
-
-const dakuYouonKanaToBase = Object.fromEntries(
-  Object.entries(dakuYouonMap).map(([base, youon]) => [youon, base])
-);
-
-const handakuYouonKanaToBase = Object.fromEntries(
-  Object.entries(handakuYouonMap).map(([base, youon]) => [youon, base])
-);
-
-function normalizeDots(dots) {
-  return dots.split("").sort().join("");
-}
-
-function convertDotsToKana() {
-  const input = document.getElementById("dotsInput").value.trim();
-
-  if (input === "") {
-    document.getElementById("kanaResult").textContent = "入力してください";
-    return;
-  }
-
-  const cells = input.split(/\s+/).map(normalizeDots);
-
-  let result = "";
-  let mode = null;
-
-  for (let cell of cells) {
-    if (cell === "4") {
-      mode = "youon";
-      continue;
-    }
-
-    if (cell === "5") {
-      mode = mode === "youon" ? "dakuYouon" : "dakuten";
-      continue;
-    }
-
-    if (cell === "6") {
-      mode = mode === "youon" ? "handakuYouon" : "handakuten";
-      continue;
-    }
-
-    let kana = brailleToKana[cell] || "？";
-
-    if (mode === "dakuten") {
-      kana = dakutenMap[kana] || "？";
-    } else if (mode === "handakuten") {
-      kana = handakutenMap[kana] || "？";
-    } else if (mode === "youon") {
-      kana = youonMap[kana] || "？";
-    } else if (mode === "dakuYouon") {
-      kana = dakuYouonMap[kana] || "？";
-    } else if (mode === "handakuYouon") {
-      kana = handakuYouonMap[kana] || "？";
-    }
-
-    result += kana;
-    mode = null;
-  }
-
-  document.getElementById("kanaResult").textContent = result;
-}
-
-function convertKanaToDots() {
-  const input = document.getElementById("kanaInput").value.trim();
-
-  if (input === "") {
-    document.getElementById("dotsResult").textContent = "入力してください";
-    return;
-  }
-
-  const result = [];
-
-  for (let i = 0; i < input.length; i++) {
-    const twoChars = input.slice(i, i + 2);
-
-    if (dakuYouonKanaToBase[twoChars]) {
-      const baseKana = dakuYouonKanaToBase[twoChars];
-      result.push(dotsToBrailleChar["4"]);
-      result.push(dotsToBrailleChar["5"]);
-      result.push(dotsToBrailleChar[kanaToBraille[baseKana]]);
-      i++;
-      continue;
-    }
-
-    if (handakuYouonKanaToBase[twoChars]) {
-      const baseKana = handakuYouonKanaToBase[twoChars];
-      result.push(dotsToBrailleChar["4"]);
-      result.push(dotsToBrailleChar["6"]);
-      result.push(dotsToBrailleChar[kanaToBraille[baseKana]]);
-      i++;
-      continue;
-    }
-
-    if (youonKanaToBase[twoChars]) {
-      const baseKana = youonKanaToBase[twoChars];
-      result.push(dotsToBrailleChar["4"]);
-      result.push(dotsToBrailleChar[kanaToBraille[baseKana]]);
-      i++;
-      continue;
-    }
-
-    const char = input[i];
-
-    if (voicedKanaToBase[char]) {
-      const baseKana = voicedKanaToBase[char];
-      result.push(dotsToBrailleChar["5"]);
-      result.push(dotsToBrailleChar[kanaToBraille[baseKana]]);
-    } else if (handakutenKanaToBase[char]) {
-      const baseKana = handakutenKanaToBase[char];
-      result.push(dotsToBrailleChar["6"]);
-      result.push(dotsToBrailleChar[kanaToBraille[baseKana]]);
-    } else if (kanaToBraille[char]) {
-      result.push(dotsToBrailleChar[kanaToBraille[char]]);
-    } else {
-      result.push("？");
-    }
-  }
-
-  document.getElementById("dotsResult").textContent = result.join("");
+  document.getElementById("brailleResult").textContent =
+    result.join(" / ");
 }
