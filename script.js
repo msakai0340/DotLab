@@ -287,3 +287,250 @@ function convertKanaToDots() {
   document.getElementById("dotsResult").textContent =
     result.join("");
 }
+
+function hiraganaToRealBraille() {
+
+  const input = document
+    .getElementById("hiraganaBrailleInput")
+    .value
+    .trim();
+
+  if (input === "") {
+
+    document.getElementById(
+      "realBrailleResult"
+    ).textContent = "入力してください";
+
+    return;
+  }
+
+  const result = [];
+
+  for (let i = 0; i < input.length; i++) {
+
+    const twoChars = input.slice(i, i + 2);
+
+    /* 濁拗音 */
+    if (dakuYouonKanaToBase[twoChars]) {
+
+      const baseKana =
+        dakuYouonKanaToBase[twoChars];
+
+      result.push(dotsToBrailleChar["4"]);
+      result.push(dotsToBrailleChar["5"]);
+      result.push(
+        dotsToBrailleChar[
+          kanaToBraille[baseKana]
+        ]
+      );
+
+      i++;
+      continue;
+    }
+
+    /* 半濁拗音 */
+    if (handakuYouonKanaToBase[twoChars]) {
+
+      const baseKana =
+        handakuYouonKanaToBase[twoChars];
+
+      result.push(dotsToBrailleChar["4"]);
+      result.push(dotsToBrailleChar["6"]);
+      result.push(
+        dotsToBrailleChar[
+          kanaToBraille[baseKana]
+        ]
+      );
+
+      i++;
+      continue;
+    }
+
+    /* 拗音 */
+    if (youonKanaToBase[twoChars]) {
+
+      const baseKana =
+        youonKanaToBase[twoChars];
+
+      result.push(dotsToBrailleChar["4"]);
+      result.push(
+        dotsToBrailleChar[
+          kanaToBraille[baseKana]
+        ]
+      );
+
+      i++;
+      continue;
+    }
+
+    const char = input[i];
+
+    /* 濁音 */
+    if (voicedKanaToBase[char]) {
+
+      const baseKana =
+        voicedKanaToBase[char];
+
+      result.push(dotsToBrailleChar["5"]);
+      result.push(
+        dotsToBrailleChar[
+          kanaToBraille[baseKana]
+        ]
+      );
+    }
+
+    /* 半濁音 */
+    else if (handakutenKanaToBase[char]) {
+
+      const baseKana =
+        handakutenKanaToBase[char];
+
+      result.push(dotsToBrailleChar["6"]);
+      result.push(
+        dotsToBrailleChar[
+          kanaToBraille[baseKana]
+        ]
+      );
+    }
+
+    /* 通常文字 */
+    else if (kanaToBraille[char]) {
+
+      result.push(
+        dotsToBrailleChar[
+          kanaToBraille[char]
+        ]
+      );
+    }
+
+    else {
+
+      result.push("？");
+    }
+  }
+
+  document.getElementById(
+    "realBrailleResult"
+  ).textContent = result.join("");
+}
+
+function brailleNumberToHiragana() {
+
+  const input = document.getElementById("brailleNumberInput").value.trim();
+
+  if (input === "") {
+    document.getElementById("brailleNumberResult").textContent = "入力してください";
+    return;
+  }
+
+  const cells = input.split(/\s+/).map(normalizeDots);
+
+  let result = "";
+  let mode = null;
+
+  for (let cell of cells) {
+
+    if (cell === "4") {
+      mode = "youon";
+      continue;
+    }
+
+    if (cell === "5") {
+      mode = mode === "youon" ? "dakuYouon" : "dakuten";
+      continue;
+    }
+
+    if (cell === "6") {
+      mode = mode === "youon" ? "handakuYouon" : "handakuten";
+      continue;
+    }
+
+    let kana = brailleToKana[cell] || "？";
+
+    if (mode === "dakuten") {
+      kana = dakutenMap[kana] || "？";
+    }
+    else if (mode === "handakuten") {
+      kana = handakutenMap[kana] || "？";
+    }
+    else if (mode === "youon") {
+      kana = youonMap[kana] || "？";
+    }
+    else if (mode === "dakuYouon") {
+      kana = dakuYouonMap[kana] || "？";
+    }
+    else if (mode === "handakuYouon") {
+      kana = handakuYouonMap[kana] || "？";
+    }
+
+    result += kana;
+    mode = null;
+  }
+
+  document.getElementById("brailleNumberResult").textContent = result;
+}
+
+
+function hiraganaToBrailleNumber() {
+
+  const input = document.getElementById("hiraganaInput").value.trim();
+
+  if (input === "") {
+    document.getElementById("brailleNumberResult2").textContent = "入力してください";
+    return;
+  }
+
+  const result = [];
+
+  for (let i = 0; i < input.length; i++) {
+
+    const twoChars = input.slice(i, i + 2);
+
+    if (dakuYouonKanaToBase[twoChars]) {
+      const baseKana = dakuYouonKanaToBase[twoChars];
+      result.push("4");
+      result.push("5");
+      result.push(kanaToBraille[baseKana]);
+      i++;
+      continue;
+    }
+
+    if (handakuYouonKanaToBase[twoChars]) {
+      const baseKana = handakuYouonKanaToBase[twoChars];
+      result.push("4");
+      result.push("6");
+      result.push(kanaToBraille[baseKana]);
+      i++;
+      continue;
+    }
+
+    if (youonKanaToBase[twoChars]) {
+      const baseKana = youonKanaToBase[twoChars];
+      result.push("4");
+      result.push(kanaToBraille[baseKana]);
+      i++;
+      continue;
+    }
+
+    const char = input[i];
+
+    if (voicedKanaToBase[char]) {
+      const baseKana = voicedKanaToBase[char];
+      result.push("5");
+      result.push(kanaToBraille[baseKana]);
+    }
+    else if (handakutenKanaToBase[char]) {
+      const baseKana = handakutenKanaToBase[char];
+      result.push("6");
+      result.push(kanaToBraille[baseKana]);
+    }
+    else if (kanaToBraille[char]) {
+      result.push(kanaToBraille[char]);
+    }
+    else {
+      result.push("？");
+    }
+  }
+
+  document.getElementById("brailleNumberResult2").textContent = result.join(" ");
+}

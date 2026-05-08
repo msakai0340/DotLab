@@ -161,7 +161,7 @@ button:hover{
 
     <input id="brailleNumberInput" type="text" placeholder="点字数字をスペース区切りで入力">
 
-    <button onclick="brailleNumberToHiragana()">ひらがなに変換</button>
+    <button class="touch-button" onclick="brailleNumberToHiragana()">ひらがなに変換</button>
 
     <div class="result" id="brailleNumberResult">-</div>
 </div>
@@ -175,7 +175,7 @@ button:hover{
 
     <input id="hiraganaInput" type="text" placeholder="ひらがなを入力">
 
-    <button onclick="hiraganaToBrailleNumber()">点字数字に変換</button>
+    <button class="touch-button" onclick="hiraganaToBrailleNumber()">点字数字に変換</button>
 
     <div class="result small-result" id="brailleNumberResult2">-</div>
 </div>
@@ -189,8 +189,7 @@ button:hover{
 
     <input id="hiraganaBrailleInput" type="text" placeholder="ひらがなを入力">
 
-    <button onclick="hiraganaToRealBraille()">点字に変換</button>
-
+   <button class="touch-button" onclick="hiraganaToRealBraille()">点字に変換</button>
     <div class="result real-braille" id="realBrailleResult">-</div>
 </div>
 
