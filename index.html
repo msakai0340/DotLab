@@ -7,6 +7,143 @@
 <title>点字学習アプリ</title>
 
 <link rel="stylesheet" href="style.css">
+
+<style>
+body{
+    margin:0;
+    padding:20px;
+    background:#f3f3f3;
+    font-family:sans-serif;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    padding:45px;
+    margin-bottom:40px;
+    border-radius:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    font-size:72px;
+    margin-bottom:50px;
+}
+
+h2{
+    text-align:center;
+    font-size:54px;
+    margin-bottom:30px;
+}
+
+.description{
+    text-align:center;
+    color:#666;
+    font-size:34px;
+    margin-bottom:30px;
+}
+
+input{
+    width:100%;
+    padding:28px;
+    font-size:42px;
+    border:2px solid #ccc;
+    border-radius:12px;
+    box-sizing:border-box;
+    margin-bottom:30px;
+}
+
+button{
+    display:block;
+    margin:0 auto;
+    padding:24px 60px;
+    font-size:42px;
+    background:#222;
+    color:white;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#444;
+}
+
+.result{
+    margin-top:35px;
+    background:#eee;
+    padding:45px;
+    border-radius:18px;
+    text-align:center;
+    font-size:72px;
+    font-weight:bold;
+    word-break:break-all;
+    line-height:1.7;
+}
+
+.small-result{
+    font-size:52px;
+    line-height:1.8;
+}
+
+.real-braille{
+    font-size:90px;
+    letter-spacing:12px;
+}
+
+@media(max-width:700px){
+
+    body{
+        padding:10px;
+    }
+
+    .card{
+        padding:25px;
+    }
+
+    h1{
+        font-size:42px;
+    }
+
+    h2{
+        font-size:34px;
+    }
+
+    .description{
+        font-size:22px;
+    }
+
+    input{
+        font-size:28px;
+        padding:18px;
+    }
+
+    button{
+        width:100%;
+        font-size:28px;
+        padding:18px;
+    }
+
+    .result{
+        font-size:42px;
+        padding:30px;
+    }
+
+    .small-result{
+        font-size:34px;
+    }
+
+    .real-braille{
+        font-size:58px;
+        letter-spacing:6px;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -19,7 +156,7 @@
     <h2>① 点字数字 → ひらがな</h2>
 
     <div class="description">
-        例：24 136 345 14 5 246
+        例：24 136 345 3 2 6
     </div>
 
     <input id="brailleNumberInput" type="text" placeholder="点字数字をスペース区切りで入力">
@@ -33,7 +170,7 @@
     <h2>② ひらがな → 点字数字</h2>
 
     <div class="description">
-        例：きょう、がっこう！
+        例：おはよう！
     </div>
 
     <input id="hiraganaInput" type="text" placeholder="ひらがなを入力">
@@ -47,7 +184,7 @@
     <h2>③ ひらがな → 点字</h2>
 
     <div class="description">
-        例：しゃしん、びっくり！
+        例：おはよう！
     </div>
 
     <input id="hiraganaBrailleInput" type="text" placeholder="ひらがなを入力">
@@ -59,160 +196,7 @@
 
 </div>
 
-<script>
-
-const brailleNumberMap = {
-    "あ":"1","い":"12","う":"14","え":"124","お":"24",
-    "か":"16","き":"126","く":"146","け":"1246","こ":"246",
-    "さ":"156","し":"1256","す":"1456","せ":"12456","そ":"2456",
-    "た":"15","ち":"125","つ":"145","て":"1245","と":"245",
-    "な":"135","に":"1235","ぬ":"1345","ね":"12345","の":"2345",
-    "は":"136","ひ":"1236","ふ":"1346","へ":"12346","ほ":"2346",
-    "ま":"1356","み":"12356","む":"13456","め":"123456","も":"23456",
-    "や":"34","ゆ":"346","よ":"345",
-    "ら":"123","り":"1234","る":"12345","れ":"123456","ろ":"234",
-    "わ":"356","を":"2356","ん":"356",
-
-    "が":"5 16","ぎ":"5 126","ぐ":"5 146","げ":"5 1246","ご":"5 246",
-    "ざ":"5 156","じ":"5 1256","ず":"5 1456","ぜ":"5 12456","ぞ":"5 2456",
-    "だ":"5 15","ぢ":"5 125","づ":"5 145","で":"5 1245","ど":"5 245",
-    "ば":"5 136","び":"5 1236","ぶ":"5 1346","べ":"5 12346","ぼ":"5 2346",
-
-    "ぱ":"6 136","ぴ":"6 1236","ぷ":"6 1346","ぺ":"6 12346","ぽ":"6 2346",
-
-    "きゃ":"126 34",
-    "きゅ":"126 346",
-    "きょ":"126 345",
-
-    "しゃ":"1256 34",
-    "しゅ":"1256 346",
-    "しょ":"1256 345",
-
-    "ちゃ":"125 34",
-    "ちゅ":"125 346",
-    "ちょ":"125 345",
-
-    "っ":"2",
-    "ー":"25",
-    "、":"3",
-    "。":"256",
-    "！":"235",
-    "!":"235",
-    "？":"236",
-    "?":"236"
-};
-
-const realBrailleMap = {
-    "あ":"⠁","い":"⠃","う":"⠉","え":"⠋","お":"⠊",
-    "か":"⠡","き":"⠣","く":"⠩","け":"⠫","こ":"⠪",
-    "さ":"⠱","し":"⠳","す":"⠹","せ":"⠻","そ":"⠺",
-    "た":"⠑","ち":"⠓","つ":"⠙","て":"⠛","と":"⠚",
-    "な":"⠕","に":"⠗","ぬ":"⠝","ね":"⠟","の":"⠞",
-    "は":"⠥","ひ":"⠧","ふ":"⠭","へ":"⠯","ほ":"⠮",
-    "ま":"⠵","み":"⠷","む":"⠽","め":"⠿","も":"⠾",
-    "や":"⠌","ゆ":"⠬","よ":"⠜",
-    "ら":"⠇","り":"⠏","る":"⠟","れ":"⠿","ろ":"⠎",
-    "わ":"⠴","を":"⠶","ん":"⠴",
-
-    "が":"⠐⠡","ぎ":"⠐⠣","ぐ":"⠐⠩","げ":"⠐⠫","ご":"⠐⠪",
-    "ざ":"⠐⠱","じ":"⠐⠳","ず":"⠐⠹","ぜ":"⠐⠻","ぞ":"⠐⠺",
-    "だ":"⠐⠑","ぢ":"⠐⠓","づ":"⠐⠙","で":"⠐⠛","ど":"⠐⠚",
-    "ば":"⠐⠥","び":"⠐⠧","ぶ":"⠐⠭","べ":"⠐⠯","ぼ":"⠐⠮",
-
-    "ぱ":"⠠⠥","ぴ":"⠠⠧","ぷ":"⠠⠭","ぺ":"⠠⠯","ぽ":"⠠⠮",
-
-    "きゃ":"⠣⠌",
-    "きゅ":"⠣⠬",
-    "きょ":"⠣⠜",
-
-    "しゃ":"⠳⠌",
-    "しゅ":"⠳⠬",
-    "しょ":"⠳⠜",
-
-    "ちゃ":"⠓⠌",
-    "ちゅ":"⠓⠬",
-    "ちょ":"⠓⠜",
-
-    "っ":"⠂",
-    "ー":"⠒",
-    "、":"⠰",
-    "。":"⠲",
-    "！":"⠖",
-    "!":"⠖",
-    "？":"⠦",
-    "?":"⠦"
-};
-
-function brailleNumberToHiragana(){
-    const input = document.getElementById("brailleNumberInput").value.trim();
-
-    if(input === ""){
-        document.getElementById("brailleNumberResult").innerText = "入力してください";
-        return;
-    }
-
-    document.getElementById("brailleNumberResult").innerText = "この機能は簡易版です";
-}
-
-function hiraganaToBrailleNumber(){
-    const input = document.getElementById("hiraganaInput").value.trim();
-
-    if(input === ""){
-        document.getElementById("brailleNumberResult2").innerText = "入力してください";
-        return;
-    }
-
-    let result = [];
-    let i = 0;
-
-    while(i < input.length){
-        let two = input.substring(i, i + 2);
-
-        if(brailleNumberMap[two]){
-            result.push(brailleNumberMap[two]);
-            i += 2;
-        }else if(brailleNumberMap[input[i]]){
-            result.push(brailleNumberMap[input[i]]);
-            i++;
-        }else{
-            result.push("?");
-            i++;
-        }
-    }
-
-    document.getElementById("brailleNumberResult2").innerText = result.join(" / ");
-}
-
-function hiraganaToRealBraille(){
-    const input = document.getElementById("hiraganaBrailleInput").value.trim();
-
-    if(input === ""){
-        document.getElementById("realBrailleResult").innerText = "入力してください";
-        return;
-    }
-
-    let result = [];
-    let i = 0;
-
-    while(i < input.length){
-        let two = input.substring(i, i + 2);
-
-        if(realBrailleMap[two]){
-            result.push(realBrailleMap[two]);
-            i += 2;
-        }else if(realBrailleMap[input[i]]){
-            result.push(realBrailleMap[input[i]]);
-            i++;
-        }else{
-            result.push("?");
-            i++;
-        }
-    }
-
-    document.getElementById("realBrailleResult").innerText = result.join("");
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
