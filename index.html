@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>点字学習アプリ</title>
+
+<link rel="stylesheet" href="style.css">
 
 <style>
 body{
@@ -94,6 +97,7 @@ button:hover{
 }
 
 @media(max-width:700px){
+
     body{
         padding:10px;
     }
@@ -166,7 +170,7 @@ button:hover{
     <h2>② ひらがな → 点字数字</h2>
 
     <div class="description">
-        例：おはよう！ 
+        例：おはよう！
     </div>
 
     <input id="hiraganaInput" type="text" placeholder="ひらがなを入力">
@@ -192,226 +196,7 @@ button:hover{
 
 </div>
 
-<script>
-const brailleNumberMap = {
-
-    /* あ行 */
-    "あ":"1", "い":"12", "う":"14", "え":"124", "お":"24",
-
-    /* か行 */
-    "か":"16", "き":"126", "く":"146", "け":"1246", "こ":"246",
-
-    /* さ行 */
-    "さ":"156", "し":"1256", "す":"1456", "せ":"12456", "そ":"2456",
-
-    /* た行 */
-    "た":"135", "ち":"1235", "つ":"1345", "て":"12345", "と":"2345",
-
-    /* な行 */
-    "な":"13", "に":"123", "ぬ":"134", "ね":"1234", "の":"234",
-
-    /* は行 */
-    "は":"136", "ひ":"1236", "ふ":"1346", "へ":"12346", "ほ":"2346",
-
-    /* ま行 */
-    "ま":"1356", "み":"12356", "む":"13456", "め":"123456", "も":"23456",
-
-    /* や行 */
-    "や":"34", "ゆ":"346", "よ":"345",
-
-    /* ら行 */
-    "ら":"15", "り":"125", "る":"145", "れ":"1245", "ろ":"246",
-
-    /* わ行 */
-    "わ":"3", "を":"35", "ん":"356",
-
-    /* 濁音 */
-    "が":"5 16", "ぎ":"5 126", "ぐ":"5 146", "げ":"5 1246", "ご":"5 246",
-    "ざ":"5 156", "じ":"5 1256", "ず":"5 1456", "ぜ":"5 12456", "ぞ":"5 2456",
-    "だ":"5 135", "ぢ":"5 1235", "づ":"5 1345", "で":"5 12345", "ど":"5 2345",
-    "ば":"5 136", "び":"5 1236", "ぶ":"5 1346", "べ":"5 12346", "ぼ":"5 2346",
-
-    /* 半濁音 */
-    "ぱ":"6 136", "ぴ":"6 1236", "ぷ":"6 1346", "ぺ":"6 12346", "ぽ":"6 2346",
-
-    /* 拗音 */
-    "きゃ":"4 16", "きゅ":"4 146", "きょ":"4 246",
-    "しゃ":"4 156", "しゅ":"4 1456", "しょ":"4 2456",
-    "ちゃ":"4 135", "ちゅ":"4 1345", "ちょ":"4 2345",
-    "にゃ":"4 13", "にゅ":"4 134", "にょ":"4 234",
-    "ひゃ":"4 136", "ひゅ":"4 1346", "ひょ":"4 2346",
-    "みゃ":"4 1356", "みゅ":"4 13456", "みょ":"4 23456",
-    "りゃ":"4 15", "りゅ":"4 146", "りょ":"4 245",
-
-    /* 濁拗音 */
-    "ぎゃ":"45 16", "ぎゅ":"45 146", "ぎょ":"45 246",
-    "じゃ":"45 156", "じゅ":"45 1456", "じょ":"45 2456",
-    "びゃ":"45 136", "びゅ":"45 1346", "びょ":"45 2346",
-    "ぴゃ":"46 136", "ぴゅ":"46 1346", "ぴょ":"46 2346",
-
-    /* 句読点・記号 */
-    "、":"56",
-    "。":"256",
-    "？":"26",
-    "！":"235",
-    "・":"5"
-};
-
-const realBrailleMap = {
-
-    "あ":"⠁", "い":"⠃", "う":"⠉", "え":"⠋", "お":"⠊",
-
-    "か":"⠡", "き":"⠣", "く":"⠩", "け":"⠫", "こ":"⠪",
-
-    "さ":"⠱", "し":"⠳", "す":"⠹", "せ":"⠻", "そ":"⠺",
-
-    "た":"⠑", "ち":"⠓", "つ":"⠙", "て":"⠛", "と":"⠚",
-
-    "な":"⠕", "に":"⠗", "ぬ":"⠝", "ね":"⠟", "の":"⠞",
-
-    "は":"⠥", "ひ":"⠧", "ふ":"⠭", "へ":"⠯", "ほ":"⠮",
-
-    "ま":"⠵", "み":"⠷", "む":"⠽", "め":"⠿", "も":"⠾",
-
-    "や":"⠌", "ゆ":"⠬", "よ":"⠜",
-
-    "ら":"⠇", "り":"⠏", "る":"⠟", "れ":"⠿", "ろ":"⠎",
-
-    "わ":"⠴", "を":"⠶", "ん":"⠴",
-
-    /* 濁音 */
-    "が":"⠐⠡", "ぎ":"⠐⠣", "ぐ":"⠐⠩", "げ":"⠐⠫", "ご":"⠐⠪",
-    "ざ":"⠐⠱", "じ":"⠐⠳", "ず":"⠐⠹", "ぜ":"⠐⠻", "ぞ":"⠐⠺",
-    "だ":"⠐⠑", "ぢ":"⠐⠓", "づ":"⠐⠙", "で":"⠐⠛", "ど":"⠐⠚",
-    "ば":"⠐⠥", "び":"⠐⠧", "ぶ":"⠐⠭", "べ":"⠐⠯", "ぼ":"⠐⠮",
-
-    /* 半濁音 */
-    "ぱ":"⠠⠥", "ぴ":"⠠⠧", "ぷ":"⠠⠭", "ぺ":"⠠⠯", "ぽ":"⠠⠮",
-
-    /* 拗音 */
-    "きゃ":"⠈⠡", "きゅ":"⠈⠩", "きょ":"⠈⠪",
-    "しゃ":"⠈⠱", "しゅ":"⠈⠹", "しょ":"⠈⠺",
-    "ちゃ":"⠈⠑", "ちゅ":"⠈⠙", "ちょ":"⠈⠚",
-    "にゃ":"⠈⠕", "にゅ":"⠈⠝", "にょ":"⠈⠞",
-    "ひゃ":"⠈⠥", "ひゅ":"⠈⠭", "ひょ":"⠈⠮",
-    "みゃ":"⠈⠵", "みゅ":"⠈⠽", "みょ":"⠈⠾",
-    "りゃ":"⠈⠇", "りゅ":"⠈⠟", "りょ":"⠈⠎",
-
-    /* 濁拗音 */
-    "ぎゃ":"⠘⠡", "ぎゅ":"⠘⠩", "ぎょ":"⠘⠪",
-    "じゃ":"⠘⠱", "じゅ":"⠘⠹", "じょ":"⠘⠺",
-    "びゃ":"⠘⠥", "びゅ":"⠘⠭", "びょ":"⠘⠮",
-    "ぴゃ":"⠨⠥", "ぴゅ":"⠨⠭", "ぴょ":"⠨⠮",
-
-    /* 記号 */
-    "、":"⠂",
-    "。":"⠲",
-    "？":"⠦",
-    "！":"⠖",
-    "・":"⠐"
-};
-
-const brailleToHiraganaMap = {};
-
-for(const key in brailleNumberMap){
-    brailleToHiraganaMap[brailleNumberMap[key]] = key;
-}
-
-function convertHiragana(input, map){
-
-    let result = [];
-    let i = 0;
-
-    while(i < input.length){
-
-        const twoChars = input.substring(i, i + 2);
-
-        if(map[twoChars]){
-            result.push(map[twoChars]);
-            i += 2;
-        }else{
-
-            const oneChar = input[i];
-
-            if(map[oneChar]){
-                result.push(map[oneChar]);
-            }else{
-                result.push("?");
-            }
-
-            i++;
-        }
-    }
-
-    return result;
-}
-
-function brailleNumberToHiragana(){
-
-    const input = document.getElementById("brailleNumberInput").value.trim();
-
-    if(input === ""){
-        document.getElementById("brailleNumberResult").innerText = "入力してください";
-        return;
-    }
-
-    const nums = input.split(/\s+/);
-
-    let result = [];
-    let i = 0;
-
-    while(i < nums.length){
-
-        const two =
-            nums[i] + " " + nums[i + 1];
-
-        if(brailleToHiraganaMap[two]){
-            result.push(brailleToHiraganaMap[two]);
-            i += 2;
-        }
-        else if(brailleToHiraganaMap[nums[i]]){
-            result.push(brailleToHiraganaMap[nums[i]]);
-            i++;
-        }
-        else{
-            result.push("?");
-            i++;
-        }
-    }
-
-    document.getElementById("brailleNumberResult").innerText = result.join("");
-}
-
-function hiraganaToBrailleNumber(){
-
-    const input = document.getElementById("hiraganaInput").value.trim();
-
-    if(input === ""){
-        document.getElementById("brailleNumberResult2").innerText = "入力してください";
-        return;
-    }
-
-    const result = convertHiragana(input, brailleNumberMap);
-
-    document.getElementById("brailleNumberResult2").innerText =
-        result.join(" / ");
-}
-
-function hiraganaToRealBraille(){
-
-    const input = document.getElementById("hiraganaBrailleInput").value.trim();
-
-    if(input === ""){
-        document.getElementById("realBrailleResult").innerText = "入力してください";
-        return;
-    }
-
-    const result = convertHiragana(input, realBrailleMap);
-
-    document.getElementById("realBrailleResult").innerText =
-        result.join("");
-}
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
