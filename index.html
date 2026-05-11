@@ -4,15 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>点字学習アプリ</title>
+<title>点字をよんでみよう</title>
 
 <link rel="stylesheet" href="style.css">
 
 <style>
+
 body{
     margin:0;
     padding:20px;
-    background:#f3f3f3;
+    background:#edf2f5;
     font-family:sans-serif;
 }
 
@@ -21,6 +22,34 @@ body{
     margin:auto;
 }
 
+/* TOPカード */
+.menu-card{
+    background:#fffdfb;
+    border-radius:28px;
+    padding:26px;
+    margin-bottom:22px;
+
+    box-shadow:
+        0 8px 22px rgba(120,140,160,0.14),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+
+    border:1px solid rgba(220,230,235,0.8);
+}
+
+.menu-card-title{
+    font-size:28px;
+    font-weight:700;
+    color:#42505c;
+    margin-bottom:12px;
+}
+
+.menu-card-text{
+    font-size:18px;
+    line-height:1.7;
+    color:#65727d;
+}
+
+/* 既存カード */
 .card{
     background:white;
     padding:45px;
@@ -32,7 +61,16 @@ body{
 h1{
     text-align:center;
     font-size:72px;
-    margin-bottom:50px;
+    margin-bottom:10px;
+    color:#42505c;
+}
+
+.subtitle{
+    text-align:center;
+    font-size:24px;
+    line-height:1.8;
+    color:#6a7680;
+    margin-bottom:45px;
 }
 
 h2{
@@ -57,21 +95,47 @@ input{
     box-sizing:border-box;
     margin-bottom:30px;
 }
-
-button{
+/* 触感ボタン：やさしいベージュゼリー */
+.touch-button{
     display:block;
     margin:0 auto;
     padding:24px 60px;
     font-size:42px;
-    background:#222;
-    color:white;
+    font-weight:700;
+    color:#5a4638;
+
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.28), transparent 28%),
+        linear-gradient(to bottom, #f4e3d1 0%, #e6c9ad 55%, #d7b08f 100%);
+
     border:none;
-    border-radius:14px;
+    border-radius:34px;
     cursor:pointer;
+
+    box-shadow:
+        0 10px 0 #b98f6f,
+        0 16px 24px rgba(120,90,65,0.18),
+        inset 0 3px 5px rgba(255,255,255,0.30),
+        inset 0 -5px 8px rgba(90,55,35,0.12);
+
+    transition:
+        transform 0.08s ease,
+        box-shadow 0.08s ease,
+        filter 0.08s ease;
 }
 
-button:hover{
-    background:#444;
+.touch-button:hover{
+    filter:brightness(1.03);
+    transform:translateY(-1px);
+}
+
+.touch-button:active{
+    transform:translateY(7px) scale(0.98);
+
+    box-shadow:
+        0 3px 0 #b98f6f,
+        0 6px 12px rgba(120,90,65,0.14),
+        inset 0 3px 8px rgba(90,55,35,0.16);
 }
 
 .result{
@@ -102,12 +166,31 @@ button:hover{
         padding:10px;
     }
 
+    .menu-card{
+        padding:22px;
+        border-radius:24px;
+        margin-bottom:18px;
+    }
+
+    .menu-card-title{
+        font-size:24px;
+    }
+
+    .menu-card-text{
+        font-size:16px;
+    }
+
     .card{
         padding:25px;
     }
 
     h1{
         font-size:42px;
+    }
+
+    .subtitle{
+        font-size:18px;
+        margin-bottom:30px;
     }
 
     h2{
@@ -123,7 +206,7 @@ button:hover{
         padding:18px;
     }
 
-    button{
+    .touch-button{
         width:100%;
         font-size:28px;
         padding:18px;
@@ -143,6 +226,7 @@ button:hover{
         letter-spacing:6px;
     }
 }
+
 </style>
 </head>
 
@@ -150,10 +234,58 @@ button:hover{
 
 <div class="container">
 
-<h1>点字学習アプリ</h1>
+<h1>点字をよんでみよう</h1>
+
+<div class="subtitle">
+    子供の言葉を受け取る<br>
+    点字学習・コミュニケーションアプリ
+</div>
+
+<!-- TOPカード -->
+
+<div class="menu-card">
+
+    <div class="menu-card-title">
+        ① 点字を読んでみる
+    </div>
+
+    <div class="menu-card-text">
+        点字の番号から、
+        ひらがなを読むことができます
+    </div>
+
+</div>
+
+<div class="menu-card">
+
+    <div class="menu-card-title">
+        ② 点の場所を見てみる
+    </div>
+
+    <div class="menu-card-text">
+        ひらがなを、
+        点字の番号で見ることができます
+    </div>
+
+</div>
+
+<div class="menu-card">
+
+    <div class="menu-card-title">
+        ③ 点字の形を見てみる
+    </div>
+
+    <div class="menu-card-text">
+        ひらがなを、
+        実際の点字で表示します
+    </div>
+
+</div>
+
+<!-- 既存機能 -->
 
 <div class="card">
-    <h2>① 点字数字 → ひらがな</h2>
+    <h2>① 点字を読んでみる</h2>
 
     <div class="description">
         例：24 136 345 3 2 6
@@ -161,13 +293,13 @@ button:hover{
 
     <input id="brailleNumberInput" type="text" placeholder="点字数字をスペース区切りで入力">
 
-    <button onclick="brailleNumberToHiragana()">ひらがなに変換</button>
+    <button class="touch-button" onclick="brailleNumberToHiragana()">読んでみる</button>
 
     <div class="result" id="brailleNumberResult">-</div>
 </div>
 
 <div class="card">
-    <h2>② ひらがな → 点字数字</h2>
+    <h2>② 点の場所を見てみる</h2>
 
     <div class="description">
         例：おはよう！
@@ -175,13 +307,13 @@ button:hover{
 
     <input id="hiraganaInput" type="text" placeholder="ひらがなを入力">
 
-    <button onclick="hiraganaToBrailleNumber()">点字数字に変換</button>
+    <button class="touch-button" onclick="hiraganaToBrailleNumber()">点の場所を見る</button>
 
     <div class="result small-result" id="brailleNumberResult2">-</div>
 </div>
 
 <div class="card">
-    <h2>③ ひらがな → 点字</h2>
+    <h2>③ 点字の形を見てみる</h2>
 
     <div class="description">
         例：おはよう！
@@ -189,7 +321,7 @@ button:hover{
 
     <input id="hiraganaBrailleInput" type="text" placeholder="ひらがなを入力">
 
-    <button onclick="hiraganaToRealBraille()">点字に変換</button>
+    <button class="touch-button" onclick="hiraganaToRealBraille()">点字を表示する</button>
 
     <div class="result real-braille" id="realBrailleResult">-</div>
 </div>
