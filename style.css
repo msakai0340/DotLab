@@ -1,19 +1,21 @@
 body{
     margin:0;
     padding:20px;
+    padding-bottom:110px;
     background:#edf2f5;
     font-family:sans-serif;
 }
 
 .container{
-    max-width:1000px;
-    margin:auto;
+    width:100%;
+    max-width:430px;
+    margin:0 auto;
 }
 
 .card{
     background:#fffdfb;
-    padding:45px;
-    margin-bottom:40px;
+    padding:28px;
+    margin-bottom:24px;
     border-radius:28px;
     box-shadow:
         0 8px 24px rgba(120,140,160,0.12),
@@ -23,56 +25,66 @@ body{
 
 h1{
     text-align:center;
-    font-size:72px;
-    margin-bottom:50px;
+    font-size:42px;
+    margin-bottom:28px;
     color:#42505c;
+    line-height:1.4;
 }
 
 h2{
     text-align:center;
-    font-size:54px;
-    margin-bottom:30px;
+    font-size:28px;
+    margin-bottom:18px;
     color:#52616d;
 }
 
 .description{
     text-align:center;
     color:#7a8792;
-    font-size:34px;
-    margin-bottom:30px;
-    line-height:1.6;
+    font-size:20px;
+    margin-bottom:18px;
+    line-height:1.7;
 }
 
 input{
     width:100%;
-    padding:28px;
-    font-size:42px;
+    padding:18px;
+    font-size:22px;
     border:none;
     border-radius:22px;
     box-sizing:border-box;
-    margin-bottom:30px;
+    margin-bottom:24px;
     background:#f7fafc;
     color:#42505c;
+
     box-shadow:
         inset 0 2px 6px rgba(120,140,160,0.12),
         0 1px 0 rgba(255,255,255,0.7);
+
     outline:none;
     transition:0.15s ease;
 }
 
 input:focus{
     background:white;
+
     box-shadow:
         inset 0 2px 8px rgba(120,140,160,0.15),
         0 0 0 4px rgba(120,146,168,0.12);
 }
 
-/* 触感ボタン：やさしいベージュゼリー */
+/* ======================
+   触感ボタン
+====================== */
+
 .touch-button{
     display:block;
+    width:100%;
     margin:0 auto;
-    padding:24px 60px;
-    font-size:42px;
+
+    padding:18px 24px;
+
+    font-size:24px;
     font-weight:700;
     color:#5a4638;
 
@@ -114,53 +126,76 @@ input:focus{
     filter:brightness(0.99);
 }
 
+/* ======================
+   結果表示
+====================== */
+
 .result{
-    margin-top:35px;
+    margin-top:28px;
+
     background:#f7fafc;
-    padding:45px;
+
+    padding:28px;
+
     border-radius:24px;
+
     text-align:center;
-    font-size:72px;
+
+    font-size:36px;
     font-weight:bold;
+
     word-break:break-all;
+
     line-height:1.7;
+
     color:#42505c;
+
     box-shadow:
         inset 0 2px 8px rgba(120,140,160,0.08);
 }
 
 .small-result{
-    font-size:52px;
+    font-size:28px;
     line-height:1.8;
 }
 
 .real-braille{
-    font-size:90px;
-    letter-spacing:12px;
+    font-size:52px;
+    letter-spacing:6px;
 }
 
-/* 点字を1マスずつ見せる */
+/* ======================
+   点字アニメ
+====================== */
+
 .braille-cell{
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    margin:8px;
-    padding:10px 14px;
-    font-size:72px;
+
+    margin:5px;
+    padding:8px 10px;
+
+    font-size:42px;
     line-height:1;
+
     background:#fffdf8;
+
     border-radius:18px;
+
     box-shadow:
         0 4px 10px rgba(120,90,65,0.12),
         inset 0 1px 2px rgba(255,255,255,0.8);
+
     animation:softLetterIn 0.35s ease forwards;
 }
 
-/* 文字をふわっと出す */
 .fade-letter{
     display:inline-block;
+
     opacity:0;
     transform:translateY(6px);
+
     animation:softLetterIn 0.35s ease forwards;
 }
 
@@ -171,123 +206,68 @@ input:focus{
     }
 }
 
-/* TOPカード */
+/* ======================
+   カード
+====================== */
+
 .menu-card{
     background:#fffdfb;
+
     border-radius:28px;
-    padding:26px;
-    margin-bottom:22px;
+
+    padding:22px;
+
+    margin-bottom:18px;
+
     box-shadow:
         0 8px 22px rgba(120,140,160,0.14),
         inset 0 1px 0 rgba(255,255,255,0.8);
+
     border:1px solid rgba(220,230,235,0.8);
 }
 
 .menu-card-title{
-    font-size:28px;
+    font-size:22px;
     font-weight:700;
     color:#42505c;
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
 .menu-card-text{
-    font-size:18px;
-    line-height:1.7;
+    font-size:15px;
+    line-height:1.8;
     color:#65727d;
 }
 
-/* スマホ */
-@media(max-width:700px){
-
-    body{
-        padding:10px;
-    }
-
-    .card{
-        padding:25px;
-        border-radius:24px;
-    }
-
-    h1{
-        font-size:42px;
-    }
-
-    h2{
-        font-size:34px;
-    }
-
-    .description{
-        font-size:22px;
-    }
-
-    input{
-        font-size:28px;
-        padding:18px;
-    }
-
-    .touch-button{
-        width:100%;
-        font-size:28px;
-        padding:18px;
-    }
-
-    .result{
-        font-size:42px;
-        padding:30px;
-    }
-
-    .small-result{
-        font-size:34px;
-    }
-
-    .real-braille{
-        font-size:58px;
-        letter-spacing:6px;
-    }
-
-    .braille-cell{
-        font-size:48px;
-        padding:8px 10px;
-        margin:5px;
-    }
-
-    .menu-card{
-        padding:22px;
-        border-radius:24px;
-        margin-bottom:18px;
-    }
-
-    .menu-card-title{
-        font-size:24px;
-    }
-
-    .menu-card-text{
-        font-size:16px;
-    }
-}
-
 /* ======================
-   下メニュー固定
+   下メニュー
 ====================== */
 
 .bottom-nav{
     position:fixed;
+
     left:50%;
     bottom:18px;
+
     transform:translateX(-50%);
 
     width:calc(100% - 36px);
     max-width:390px;
+
     height:66px;
 
     background:#ffffff;
+
     border-radius:18px;
 
     display:grid;
     grid-template-columns:repeat(4,1fr);
+
     align-items:center;
 
-    box-shadow:0 8px 25px rgba(100,80,60,0.12);
+    box-shadow:
+        0 8px 25px rgba(100,80,60,0.12);
+
     border:1px solid #efe6df;
 
     z-index:9999;
@@ -295,8 +275,11 @@ input:focus{
 
 .bottom-nav a{
     text-decoration:none;
+
     color:#9ba3ad;
+
     text-align:center;
+
     font-size:11px;
     font-weight:600;
 }
@@ -308,8 +291,4 @@ input:focus{
 
 .bottom-nav a.active{
     color:#6f91c4;
-}
-
-body{
-    padding-bottom:110px;
 }
