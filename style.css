@@ -265,3 +265,51 @@ input:focus{
         font-size:16px;
     }
 }
+
+/* ======================
+   下メニュー固定
+====================== */
+
+.bottom-nav{
+    position:fixed;
+    left:50%;
+    bottom:18px;
+    transform:translateX(-50%);
+
+    width:calc(100% - 36px);
+    max-width:390px;
+    height:66px;
+
+    background:#ffffff;
+    border-radius:18px;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    align-items:center;
+
+    box-shadow:0 8px 25px rgba(100,80,60,0.12);
+    border:1px solid #efe6df;
+
+    z-index:9999;
+}
+
+.bottom-nav a{
+    text-decoration:none;
+    color:#9ba3ad;
+    text-align:center;
+    font-size:11px;
+    font-weight:600;
+}
+
+.bottom-nav a div{
+    font-size:20px;
+    margin-bottom:3px;
+}
+
+.bottom-nav a.active{
+    color:#6f91c4;
+}
+
+body{
+    padding-bottom:110px;
+}

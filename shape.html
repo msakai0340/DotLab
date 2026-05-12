@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>点字の形を見てみる</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>点字の形を見てみる</h1>
+
+        <div class="description">
+            ひらがなを入力すると、<br>
+            実際の点字の形で表示できます。
+        </div>
+
+        <div class="description">
+            例：おはよう！
+        </div>
+
+        <input
+            id="hiraganaBrailleInput"
+            type="text"
+            placeholder="例：おはよう！"
+        >
+
+        <button
+            class="touch-button"
+            onclick="hiraganaToRealBraille()"
+        >
+            点字を表示する
+        </button>
+
+        <div
+            class="result real-braille"
+            id="realBrailleResult"
+        >
+            -
+        </div>
+
+    </div>
+
+    <div class="menu-card">
+        <div class="menu-card-title">
+            このページでできること
+        </div>
+
+        <div class="menu-card-text">
+            入力したひらがなを、実際の点字の形で表示します。<br>
+            点字の形を目で見て、数字の場所とつなげて覚えやすくします。
+        </div>
+    </div>
+
+    <div class="menu-card">
+        <div class="menu-card-title">
+            ほかのページへ
+        </div>
+
+        <div class="menu-card-text">
+            <a href="top-test.html">トップへ戻る</a><br>
+            <a href="read.html">① 点字を読んでみる</a><br>
+            <a href="number.html">② 点の数字を見てみる</a>
+        </div>
+    </div>
+
+</div>
+
+<nav class="bottom-nav">
+
+    <a href="top-test.html">
+
+        <div>
+            🏠
+        </div>
+
+        <span>
+            ホーム
+        </span>
+
+    </a>
+
+    <a href="read.html">
+
+        <div>
+            ①
+        </div>
+
+        <span>
+            ①読む
+        </span>
+
+    </a>
+
+    <a href="number.html">
+
+        <div>
+            ②
+        </div>
+
+        <span>
+            ②数字
+        </span>
+
+    </a>
+
+    <a href="shape.html">
+
+        <div>
+            ③
+        </div>
+
+        <span>
+            ③点字
+        </span>
+
+    </a>
+
+</nav>
+
+<script src="script.js"></script>
+
+</body>
+</html>
