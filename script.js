@@ -1,24 +1,66 @@
+/* =========================
+   点字 → かな
+========================= */
+
 const brailleToKana = {
-  "1": "あ", "12": "い", "14": "う", "124": "え", "24": "お",
 
-  "16": "か", "126": "き", "146": "く", "1246": "け", "246": "こ",
+  "1": "あ",
+  "12": "い",
+  "14": "う",
+  "124": "え",
+  "24": "お",
 
-  "156": "さ", "1256": "し", "1456": "す", "12456": "せ", "2456": "そ",
+  "16": "か",
+  "126": "き",
+  "146": "く",
+  "1246": "け",
+  "246": "こ",
 
-  "135": "た", "1235": "ち", "1345": "つ", "12345": "て", "2345": "と",
+  "156": "さ",
+  "1256": "し",
+  "1456": "す",
+  "12456": "せ",
+  "2456": "そ",
 
-  "13": "な", "123": "に", "134": "ぬ", "1234": "ね", "234": "の",
+  "135": "た",
+  "1235": "ち",
+  "1345": "つ",
+  "12345": "て",
+  "2345": "と",
 
-  "136": "は", "1236": "ひ", "1346": "ふ", "12346": "へ", "2346": "ほ",
+  "13": "な",
+  "123": "に",
+  "134": "ぬ",
+  "1234": "ね",
+  "234": "の",
 
-  "1356": "ま", "12356": "み", "13456": "む", "123456": "め", "23456": "も",
+  "136": "は",
+  "1236": "ひ",
+  "1346": "ふ",
+  "12346": "へ",
+  "2346": "ほ",
 
-  "34": "や", "346": "ゆ", "345": "よ",
+  "1356": "ま",
+  "12356": "み",
+  "13456": "む",
+  "123456": "め",
+  "23456": "も",
 
-  "15": "ら", "125": "り", "145": "る", "1245": "れ", "245": "ろ",
+  "34": "や",
+  "346": "ゆ",
+  "345": "よ",
 
-  "3": "わ", "35": "を", "356": "ん",
+  "15": "ら",
+  "125": "り",
+  "145": "る",
+  "1245": "れ",
+  "245": "ろ",
 
+  "3": "わ",
+  "35": "を",
+  "356": "ん",
+
+  /* 記号 */
   "56": "、",
   "256": "。",
   "26": "？",
@@ -26,26 +68,67 @@ const brailleToKana = {
   "25": "ー"
 };
 
+/* =========================
+   点字 → 実際の点字
+========================= */
+
 const dotsToBrailleChar = {
-  "1": "⠁", "12": "⠃", "14": "⠉", "124": "⠋", "24": "⠊",
 
-  "16": "⠡", "126": "⠣", "146": "⠩", "1246": "⠫", "246": "⠪",
+  "1": "⠁",
+  "12": "⠃",
+  "14": "⠉",
+  "124": "⠋",
+  "24": "⠊",
 
-  "156": "⠱", "1256": "⠳", "1456": "⠹", "12456": "⠻", "2456": "⠺",
+  "16": "⠡",
+  "126": "⠣",
+  "146": "⠩",
+  "1246": "⠫",
+  "246": "⠪",
 
-  "135": "⠕", "1235": "⠗", "1345": "⠝", "12345": "⠟", "2345": "⠞",
+  "156": "⠱",
+  "1256": "⠳",
+  "1456": "⠹",
+  "12456": "⠻",
+  "2456": "⠺",
 
-  "13": "⠅", "123": "⠇", "134": "⠍", "1234": "⠏", "234": "⠎",
+  "135": "⠕",
+  "1235": "⠗",
+  "1345": "⠝",
+  "12345": "⠟",
+  "2345": "⠞",
 
-  "136": "⠥", "1236": "⠧", "1346": "⠭", "12346": "⠯", "2346": "⠮",
+  "13": "⠅",
+  "123": "⠇",
+  "134": "⠍",
+  "1234": "⠏",
+  "234": "⠎",
 
-  "1356": "⠵", "12356": "⠷", "13456": "⠽", "123456": "⠿", "23456": "⠾",
+  "136": "⠥",
+  "1236": "⠧",
+  "1346": "⠭",
+  "12346": "⠯",
+  "2346": "⠮",
 
-  "34": "⠌", "346": "⠬", "345": "⠜",
+  "1356": "⠵",
+  "12356": "⠷",
+  "13456": "⠽",
+  "123456": "⠿",
+  "23456": "⠾",
 
-  "15": "⠑", "125": "⠓", "145": "⠙", "1245": "⠛", "245": "⠚",
+  "34": "⠌",
+  "346": "⠬",
+  "345": "⠜",
 
-  "3": "⠄", "35": "⠔", "356": "⠴",
+  "15": "⠑",
+  "125": "⠓",
+  "145": "⠙",
+  "1245": "⠛",
+  "245": "⠚",
+
+  "3": "⠄",
+  "35": "⠔",
+  "356": "⠴",
 
   "56": "、",
   "256": "。",
@@ -59,91 +142,114 @@ const dotsToBrailleChar = {
   "25": "⠒"
 };
 
+/* =========================
+   かな → 点字数字
+========================= */
+
 const kanaToBraille = Object.fromEntries(
-  Object.entries(brailleToKana).map(([dots, kana]) => [kana, dots])
+  Object.entries(brailleToKana).map(
+    ([dots, kana]) => [kana, dots]
+  )
 );
 
-/* 濁音 */
-const dakutenMap = {
-  "か": "が", "き": "ぎ", "く": "ぐ", "け": "げ", "こ": "ご",
-  "さ": "ざ", "し": "じ", "す": "ず", "せ": "ぜ", "そ": "ぞ",
-  "た": "だ", "ち": "ぢ", "つ": "づ", "て": "で", "と": "ど",
-  "は": "ば", "ひ": "び", "ふ": "ぶ", "へ": "べ", "ほ": "ぼ"
+/* =========================
+   特殊点字（濁音・拗音）
+========================= */
+
+const specialBrailleMap = {
+
+  /* 濁音 */
+  "5-16": "が",
+  "5-126": "ぎ",
+  "5-146": "ぐ",
+  "5-1246": "げ",
+  "5-246": "ご",
+
+  "5-156": "ざ",
+  "5-1256": "じ",
+  "5-1456": "ず",
+  "5-12456": "ぜ",
+  "5-2456": "ぞ",
+
+  "5-135": "だ",
+  "5-1235": "ぢ",
+  "5-1345": "づ",
+  "5-12345": "で",
+  "5-2345": "ど",
+
+  "5-136": "ば",
+  "5-1236": "び",
+  "5-1346": "ぶ",
+  "5-12346": "べ",
+  "5-2346": "ぼ",
+
+  /* 半濁音 */
+  "6-136": "ぱ",
+  "6-1236": "ぴ",
+  "6-1346": "ぷ",
+  "6-12346": "ぺ",
+  "6-2346": "ぽ",
+
+  /* 拗音 */
+  "4-126": "きゃ",
+  "4-146": "きゅ",
+  "4-246": "きょ",
+
+  "4-1256": "しゃ",
+  "4-1456": "しゅ",
+  "4-2456": "しょ",
+
+  "4-1235": "ちゃ",
+  "4-1345": "ちゅ",
+  "4-2345": "ちょ",
+
+  "4-123": "りゃ",
+  "4-145": "りゅ",
+  "4-245": "りょ",
+
+  /* 濁拗音 */
+  "4-5-126": "ぎゃ",
+  "4-5-146": "ぎゅ",
+  "4-5-246": "ぎょ",
+
+  "4-5-1256": "じゃ",
+  "4-5-1456": "じゅ",
+  "4-5-2456": "じょ",
+
+  "4-5-1236": "びゃ",
+  "4-5-1346": "びゅ",
+  "4-5-2346": "びょ",
+
+  /* 半濁拗音 */
+  "4-6-1236": "ぴゃ",
+  "4-6-1346": "ぴゅ",
+  "4-6-2346": "ぴょ"
 };
 
-/* 半濁音 */
-const handakutenMap = {
-  "は": "ぱ", "ひ": "ぴ", "ふ": "ぷ", "へ": "ぺ", "ほ": "ぽ"
-};
-
-/* 拗音 */
-const youonMap = {
-  "きゃ": "き",
-  "きゅ": "く",
-  "きょ": "こ",
-
-  "しゃ": "さ",
-  "しゅ": "す",
-  "しょ": "そ",
-
-  "ちゃ": "た",
-  "ちゅ": "つ",
-  "ちょ": "と",
-
-  "にゃ": "な",
-  "にゅ": "ぬ",
-  "にょ": "の",
-
-  "ひゃ": "は",
-  "ひゅ": "ふ",
-  "ひょ": "ほ",
-
-  "みゃ": "ま",
-  "みゅ": "む",
-  "みょ": "も",
-
-  "りゃ": "ら",
-  "りゅ": "る",
-  "りょ": "ろ"
-};
-
-/* 濁音拗音 */
-const dakuYouonMap = {
-  "ぎゃ": "き",
-  "ぎゅ": "く",
-  "ぎょ": "こ",
-
-  "じゃ": "さ",
-  "じゅ": "す",
-  "じょ": "そ",
-
-  "びゃ": "は",
-  "びゅ": "ふ",
-  "びょ": "ほ"
-};
-
-/* 半濁拗音 */
-const handakuYouonMap = {
-  "ぴゃ": "は",
-  "ぴゅ": "ふ",
-  "ぴょ": "ほ"
-};
-
-const voicedKanaToBase = Object.fromEntries(
-  Object.entries(dakutenMap).map(([base, voiced]) => [voiced, base])
-);
-
-const handakutenKanaToBase = Object.fromEntries(
-  Object.entries(handakutenMap).map(([base, semi]) => [semi, base])
-);
+/* =========================
+   点並び正規化
+========================= */
 
 function normalizeDots(dots) {
-  return dots.split("").sort().join("");
+
+  return dots
+    .split("")
+    .sort()
+    .join("");
 }
 
-function showTextOneByOne(elementId, text, speed = 70) {
+/* =========================
+   1文字ずつ表示
+========================= */
 
-  const box = document.getElementById(elementId);
+function showTextOneByOne(
+  elementId,
+  text,
+  speed = 70
+) {
+
+  const box =
+    document.getElementById(elementId);
 
   if (!box) return;
 
@@ -153,9 +259,11 @@ function showTextOneByOne(elementId, text, speed = 70) {
 
   const timer = setInterval(() => {
 
-    const span = document.createElement("span");
+    const span =
+      document.createElement("span");
 
     span.className = "fade-letter";
+
     span.textContent = text[i];
 
     box.appendChild(span);
@@ -169,9 +277,18 @@ function showTextOneByOne(elementId, text, speed = 70) {
   }, speed);
 }
 
-function showBrailleOneByOne(elementId, textArray, speed = 80) {
+/* =========================
+   点字を1文字ずつ表示
+========================= */
 
-  const box = document.getElementById(elementId);
+function showBrailleOneByOne(
+  elementId,
+  textArray,
+  speed = 80
+) {
+
+  const box =
+    document.getElementById(elementId);
 
   if (!box) return;
 
@@ -181,9 +298,11 @@ function showBrailleOneByOne(elementId, textArray, speed = 80) {
 
   const timer = setInterval(() => {
 
-    const span = document.createElement("span");
+    const span =
+      document.createElement("span");
 
     span.className = "braille-cell";
+
     span.textContent = textArray[i];
 
     box.appendChild(span);
@@ -197,243 +316,88 @@ function showBrailleOneByOne(elementId, textArray, speed = 80) {
   }, speed);
 }
 
-/* 点字数字 → ひらがな */
+/* =========================
+   点字数字 → かな
+========================= */
+
 function liveBrailleConvert() {
 
-  const input = document.getElementById("brailleNumberInput").value;
+  const input =
+    document.getElementById(
+      "brailleNumberInput"
+    ).value.trim();
 
-  const cells = input.split(/\s+/);
+  const cells =
+    input.split(/\s+/);
 
   let result = "";
 
-  let mode = "";
+  for (let i = 0; i < cells.length; i++) {
 
-  for (let cell of cells) {
+    /* 3セル */
+    if (i + 2 < cells.length) {
 
-    if (cell === "") continue;
+      const three =
+        cells[i] +
+        "-" +
+        cells[i + 1] +
+        "-" +
+        cells[i + 2];
 
-    const key = normalizeDots(cell);
+      if (specialBrailleMap[three]) {
 
-    /* 拗音 */
-    if (key === "4") {
-      mode = "youon";
-      continue;
+        result +=
+          specialBrailleMap[three];
+
+        i += 2;
+
+        continue;
+      }
     }
 
-    /* 濁音 */
-    if (key === "5") {
-      mode = mode === "youon" ? "dakuYouon" : "dakuten";
-      continue;
+    /* 2セル */
+    if (i + 1 < cells.length) {
+
+      const two =
+        cells[i] +
+        "-" +
+        cells[i + 1];
+
+      if (specialBrailleMap[two]) {
+
+        result +=
+          specialBrailleMap[two];
+
+        i += 1;
+
+        continue;
+      }
     }
 
-    /* 半濁音 */
-    if (key === "6") {
-      mode = mode === "youon" ? "handakuYouon" : "handakuten";
-      continue;
-    }
+    /* 清音 */
+    const key =
+      normalizeDots(cells[i]);
 
-    let kana = brailleToKana[key] || "？";
-
-    if (mode === "dakuten") {
-      kana = dakutenMap[kana] || "？";
-    }
-
-    else if (mode === "handakuten") {
-      kana = handakutenMap[kana] || "？";
-    }
-
-    else if (mode === "youon") {
-      kana =
-        Object.keys(youonMap).find(k => youonMap[k] === kana) || "？";
-    }
-
-    else if (mode === "dakuYouon") {
-      kana =
-        Object.keys(dakuYouonMap).find(k => dakuYouonMap[k] === kana) || "？";
-    }
-
-    else if (mode === "handakuYouon") {
-      kana =
-        Object.keys(handakuYouonMap).find(k => handakuYouonMap[k] === kana) || "？";
-    }
-
-    result += kana;
-
-    mode = "";
+    result +=
+      brailleToKana[key] || "？";
   }
 
-  document.getElementById("brailleNumberResult").textContent = result;
+  document.getElementById(
+    "brailleNumberResult"
+  ).textContent = result;
 }
+
+/* =========================
+   入力クリア
+========================= */
 
 function clearBrailleInput() {
 
-  document.getElementById("brailleNumberInput").value = "";
+  document.getElementById(
+    "brailleNumberInput"
+  ).value = "";
 
-  document.getElementById("brailleNumberResult").textContent = "";
-}
-
-/* ひらがな → 点字数字 */
-function hiraganaToBrailleNumber() {
-
-  const input = document.getElementById("hiraganaInput").value.trim();
-
-  if (input === "") {
-
-    showTextOneByOne("brailleNumberResult2", "入力してください");
-
-    return;
-  }
-
-  const result = [];
-
-  for (let i = 0; i < input.length; i++) {
-
-    const twoChars = input.slice(i, i + 2);
-
-    /* 濁拗音 */
-    if (dakuYouonMap[twoChars]) {
-
-      result.push("4");
-      result.push("5");
-      result.push(kanaToBraille[dakuYouonMap[twoChars]]);
-
-      i++;
-
-      continue;
-    }
-
-    /* 半濁拗音 */
-    if (handakuYouonMap[twoChars]) {
-
-      result.push("4");
-      result.push("6");
-      result.push(kanaToBraille[handakuYouonMap[twoChars]]);
-
-      i++;
-
-      continue;
-    }
-
-    /* 拗音 */
-    if (youonMap[twoChars]) {
-
-      result.push("4");
-      result.push(kanaToBraille[youonMap[twoChars]]);
-
-      i++;
-
-      continue;
-    }
-
-    const char = input[i];
-
-    /* 濁音 */
-    if (voicedKanaToBase[char]) {
-
-      result.push("5");
-      result.push(kanaToBraille[voicedKanaToBase[char]]);
-    }
-
-    /* 半濁音 */
-    else if (handakutenKanaToBase[char]) {
-
-      result.push("6");
-      result.push(kanaToBraille[handakutenKanaToBase[char]]);
-    }
-
-    else if (kanaToBraille[char]) {
-
-      result.push(kanaToBraille[char]);
-    }
-
-    else {
-
-      result.push("？");
-    }
-  }
-
-  showTextOneByOne("brailleNumberResult2", result.join(" "));
-}
-
-/* ひらがな → 点字 */
-function hiraganaToRealBraille() {
-
-  const input = document.getElementById("hiraganaBrailleInput").value.trim();
-
-  if (input === "") {
-
-    showTextOneByOne("realBrailleResult", "入力してください");
-
-    return;
-  }
-
-  const result = [];
-
-  for (let i = 0; i < input.length; i++) {
-
-    const twoChars = input.slice(i, i + 2);
-
-    /* 濁拗音 */
-    if (dakuYouonMap[twoChars]) {
-
-      result.push(dotsToBrailleChar["4"]);
-      result.push(dotsToBrailleChar["5"]);
-      result.push(dotsToBrailleChar[kanaToBraille[dakuYouonMap[twoChars]]]);
-
-      i++;
-
-      continue;
-    }
-
-    /* 半濁拗音 */
-    if (handakuYouonMap[twoChars]) {
-
-      result.push(dotsToBrailleChar["4"]);
-      result.push(dotsToBrailleChar["6"]);
-      result.push(dotsToBrailleChar[kanaToBraille[handakuYouonMap[twoChars]]]);
-
-      i++;
-
-      continue;
-    }
-
-    /* 拗音 */
-    if (youonMap[twoChars]) {
-
-      result.push(dotsToBrailleChar["4"]);
-      result.push(dotsToBrailleChar[kanaToBraille[youonMap[twoChars]]]);
-
-      i++;
-
-      continue;
-    }
-
-    const char = input[i];
-
-    /* 濁音 */
-    if (voicedKanaToBase[char]) {
-
-      result.push(dotsToBrailleChar["5"]);
-      result.push(dotsToBrailleChar[kanaToBraille[voicedKanaToBase[char]]]);
-    }
-
-    /* 半濁音 */
-    else if (handakutenKanaToBase[char]) {
-
-      result.push(dotsToBrailleChar["6"]);
-      result.push(dotsToBrailleChar[kanaToBraille[handakutenKanaToBase[char]]]);
-    }
-
-    else if (kanaToBraille[char]) {
-
-      result.push(dotsToBrailleChar[kanaToBraille[char]]);
-    }
-
-    else {
-
-      result.push("？");
-    }
-  }
-
-  showBrailleOneByOne("realBrailleResult", result);
+  document.getElementById(
+    "brailleNumberResult"
+  ).textContent = "";
 }
