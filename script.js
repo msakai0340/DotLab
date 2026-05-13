@@ -95,7 +95,7 @@ const handakuYouonKanaToBase = Object.fromEntries(
 );
 
 function normalizeDots(dots) {
-  return dots.split("").sort().join("");
+  return dots.split("").sort().join("　");
 }
 
 function showTextOneByOne(elementId, text, speed = 80) {
