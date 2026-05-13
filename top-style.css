@@ -203,3 +203,47 @@ body {
   color: #2563eb;
   font-weight: bold;
 }
+
+.bottom-nav a.home{
+  color:#8b86a3;
+}
+
+.bottom-nav a.read{
+  color:#6f91c4;
+}
+
+.bottom-nav a.number{
+  color:#7cab72;
+}
+
+.bottom-nav a.shape{
+  color:#de8f96;
+}
+
+/* 下メニューの並びを整える */
+
+.bottom-nav a{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  text-decoration:none;
+  text-align:center;
+  font-size:12px;
+  font-weight:600;
+  line-height:1.2;
+}
+
+.bottom-nav a div{
+  font-size:22px;
+  line-height:1;
+  margin:0;
+}
+
+.bottom-nav a span{
+  display:block;
+  font-size:12px;
+  line-height:1.2;
+  white-space:nowrap;
+}
