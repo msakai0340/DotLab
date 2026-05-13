@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>点の数字を見てみる</title>
-
+<title>点字の数字を見る</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,117 +11,35 @@
 
 <div class="container">
 
-    <div class="card">
+<h1>点字の数字を見る</h1>
 
-        <h1>点の数字を見てみる</h1>
+<p class="description">
+ひらがなを入力すると、<br>
+点字の数字に変換できます。
+</p>
 
-        <div class="description">
-            ひらがなを入力すると、<br>
-            点字の数字に変換できます。
-        </div>
+<p class="example">
+例：おはよう
+</p>
 
-        <div class="description">
-            例：おはよう！
-        </div>
+<input
+type="text"
+id="hiraganaInput"
+placeholder="おはよう"
+>
 
-        <input
-            id="hiraganaInput"
-            type="text"
-            placeholder="例：おはよう！"
-        >
+<button onclick="hiraganaToBrailleNumber()">
+数字に変換
+</button>
 
-        <button
-            class="touch-button"
-            onclick="hiraganaToBrailleNumber()"
-        >
-            点の数字を見る
-        </button>
-
-        <div
-            class="result small-result"
-            id="brailleNumberResult2"
-        >
-            -
-        </div>
-
-    </div>
-
-    <div class="menu-card">
-        <div class="menu-card-title">
-            このページでできること
-        </div>
-
-        <div class="menu-card-text">
-            ひらがなを入力すると、点字の6つの点の場所を数字で表示します。<br>
-            例：お → 24、は → 136、よ → 345
-        </div>
-    </div>
-
-    <div class="menu-card">
-        <div class="menu-card-title">
-            ほかのページへ
-        </div>
-
-        <div class="menu-card-text">
-            <a href="index.html">トップへ戻る</a><br>
-            <a href="read.html">① 点字を読んでみる</a><br>
-            <a href="shape.html">③ 点字の形を見てみる</a>
-        </div>
-    </div>
-
+<div class="result" id="brailleNumberResult2">
 </div>
 
-<nav class="bottom-nav">
+<a class="back-link" href="index.html">
+ホームへ戻る
+</a>
 
-    <a href="index.html">
-
-        <div>
-            🏠
-        </div>
-
-        <span>
-            ホーム
-        </span>
-
-    </a>
-
-    <a href="read.html">
-
-        <div>
-            ①
-        </div>
-
-        <span>
-            ①読む
-        </span>
-
-    </a>
-
-    <a href="number.html">
-
-        <div>
-            ②
-        </div>
-
-        <span>
-            ②数字
-        </span>
-
-    </a>
-
-    <a href="shape.html">
-
-        <div>
-            ③
-        </div>
-
-        <span>
-            ③点字
-        </span>
-
-    </a>
-
-</nav>
+</div>
 
 <script src="script.js"></script>
 
