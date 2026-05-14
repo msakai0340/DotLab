@@ -264,6 +264,10 @@ function showTextOneByOne(
 
     span.className = "fade-letter";
 
+    span.innerHTML =
+      text[i] === " "
+      ? "&nbsp;"
+      : text[i];
     span.textContent = text[i];
 
     box.appendChild(span);
@@ -277,9 +281,37 @@ function showTextOneByOne(
   }, speed);
 }
 
+function showNumberGroupsOneByOne(elementId, items, speed = 120) {
+
+  const box = document.getElementById(elementId);
+
+  if (!box) return;
+
+  box.innerHTML = "";
+
+  let i = 0;
+
+  const timer = setInterval(() => {
+
+    const span = document.createElement("span");
+
+    span.className = "fade-letter number-token";
+    span.textContent = items[i];
+
+    box.appendChild(span);
+
+    i++;
+
+    if (i >= items.length) {
+      clearInterval(timer);
+    }
+
+  }, speed);
+}
+
+function showBrailleOneByOne(elementId, textArray, speed = 80) {
 /* =========================
    点字を1文字ずつ表示
-========================= */
 
 function showBrailleOneByOne(
   elementId,
@@ -382,6 +414,7 @@ function liveBrailleConvert() {
       brailleToKana[key] || "？";
   }
 
+ showNumberGroupsOneByOne("brailleNumberResult2", result);
   document.getElementById(
     "brailleNumberResult"
   ).textContent = result;
@@ -397,6 +430,8 @@ function clearBrailleInput() {
     "brailleNumberInput"
   ).value = "";
 
+  showBrailleOneByOne("realBrailleResult", result);
+}
   document.getElementById(
     "brailleNumberResult"
   ).textContent = "";
