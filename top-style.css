@@ -526,3 +526,191 @@ body{
   }
 
 }
+/* =========================
+   ③ 点字表
+========================= */
+
+.braille-table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  table-layout:fixed;
+}
+
+.braille-table th,
+.braille-table td{
+  border:1px solid #eee6e6;
+  text-align:center;
+  vertical-align:middle;
+  padding:4px 2px;
+}
+
+.braille-table td{
+  font-size:18px;
+  font-weight:700;
+  color:#4b5563;
+}
+
+.label-cell{
+  width:58x;
+  background:#fff8f8;
+  color:#d97486;
+  font-size:14px;
+  font-weight:700;
+  line-height:1.5;
+}
+
+.label-cell span{
+  display:block;
+  font-size:10px;
+  color:#999;
+  margin-top:3px;
+}
+
+.shape-label{
+  font-size:13px;
+}
+
+/* 小さい点字番号説明 */
+
+.mini-braille-guide{
+  width:48px;
+  margin:8px auto 0;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:4px;
+}
+
+.mini-braille-guide div{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  border:1px solid #9aa4b2;
+  background:#f8fafc;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:9px;
+  color:#6b7280;
+}
+
+/* 点字 */
+
+.dot-grid{
+  width:34px;
+  margin:auto;
+  line-height:0;
+
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:2px;
+}
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#d9dee5;
+}
+
+.dot.active{
+  background:#39475c;
+
+  box-shadow:
+    inset 0 2px 2px rgba(255,255,255,0.2),
+    inset 0 -2px 3px rgba(0,0,0,0.35),
+    0 1px 2px rgba(0,0,0,0.15);
+}
+/* =========================
+   ③カードだけ縦構成にする
+========================= */
+
+.menu-card.pink{
+  display:grid;
+  grid-template-columns:30px 1fr 14px;
+  grid-template-areas:
+    "num table next"
+    "text text next";
+  align-items:center;
+}
+
+.menu-card.pink > .number{
+  grid-area:num;
+}
+
+.menu-card.pink > .compare-sample{
+  grid-area:table;
+  width:100%;
+}
+
+.menu-card.pink > .bottom-text{
+  grid-area:text;
+  margin-top:10px;
+  padding-left:38px;
+}
+
+.menu-card.pink > .next{
+  grid-area:next;
+}
+
+/* ③の表をコンパクトに */
+
+.braille-table{
+  width:100%;
+  table-layout:fixed;
+  border-collapse:collapse;
+}
+
+.braille-table th,
+.braille-table td{
+  padding:4px 2px;
+  text-align:center;
+  vertical-align:middle;
+}
+
+.label-cell{
+  width:54px;
+  font-size:10px;
+  line-height:1.3;
+  word-break:keep-all;
+  white-space:normal;
+}
+
+.label-cell span{
+  font-size:8px;
+}
+
+.braille-table td{
+  font-size:13px;
+}
+
+/* 点字マスを小さくまとめる */
+
+.mini-braille-guide{
+  width:34px;
+  gap:2px;
+  margin:4px auto 0;
+}
+
+.mini-braille-guide div{
+  width:14px;
+  height:14px;
+  font-size:7px;
+}
+
+.dot-grid{
+  width:24px;
+  display:grid;
+  grid-template-columns:repeat(2,10px);
+  gap:1px;
+  justify-content:center;
+  margin:auto;
+}
+
+.dot{
+  width:9px;
+  height:9px;
+}

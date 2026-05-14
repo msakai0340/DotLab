@@ -15,6 +15,10 @@ body {
   box-sizing: border-box;
 }
 
+.card {
+  background: white;
+}
+
 h1 {
   text-align: center;
   font-size: 42px;
@@ -46,7 +50,8 @@ input {
   color: #3f4c5c;
 }
 
-button {
+button,
+.touch-button {
   width: 100%;
   margin-top: 28px;
   padding: 22px;
@@ -60,7 +65,8 @@ button {
   box-shadow: 0 8px 0 #c18f68;
 }
 
-button:active {
+button:active,
+.touch-button:active {
   transform: translateY(5px);
   box-shadow: 0 3px 0 #c18f68;
 }
@@ -103,6 +109,8 @@ button:active {
   text-decoration: none;
 }
 
+/* アニメーション */
+
 .fade-letter,
 .braille-cell {
   display: inline-block;
@@ -120,6 +128,76 @@ button:active {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* 数字まとまり */
+
+.number-token{
+  display:inline-block;
+  white-space:nowrap;
+  margin:0 8px 10px;
+}
+
+/* 点字6点マス表示 */
+
+.braille-pattern{
+  display:inline-grid;
+  grid-template-columns:repeat(2, 28px);
+  grid-template-rows:repeat(3, 28px);
+  gap:6px;
+  margin:8px 10px;
+  padding:10px;
+  background:#fffdf8;
+  border-radius:14px;
+  box-shadow:0 4px 10px rgba(120,90,65,0.12);
+  animation:fadeIn 0.65s ease;
+}
+
+.braille-dot{
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  border:1.5px solid #7b8794;
+  color:#7b8794;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  font-weight:bold;
+  background:white;
+}
+
+.braille-dot.active{
+  background:#34435a;
+  color:white;
+  border-color:#34435a;
+}
+
+/* shapeページ説明カード */
+
+.menu-card {
+  margin-top: 24px;
+  background: #f8fafc;
+  border-radius: 24px;
+  padding: 22px;
+}
+
+.menu-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4b5563;
+  margin-bottom: 14px;
+}
+
+.menu-card-text {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #6b7280;
+}
+
+.menu-card-text a {
+  color: #6f91c4;
+  text-decoration: none;
 }
 
 /* 下メニュー */
@@ -162,28 +240,90 @@ button:active {
   white-space: nowrap;
 }
 
-.bottom-nav a.home {
-  color: #8b86a3;
+/* 下メニュー色 */
+
+.bottom-nav a.home{
+  color:#7d7899;
 }
 
-.bottom-nav a.number {
-  color: #7cab72;
+.bottom-nav a.number{
+  color:#7cab72;
 }
 
-.bottom-nav a.read {
-  color: #6f91c4;
+.bottom-nav a.read{
+  color:#6f91c4;
 }
 
-.bottom-nav a.shape {
-  color: #de8f96;
+.bottom-nav a.shape{
+  color:#de8f96;
 }
 
-.bottom-nav .active {
-  font-weight: bold;
+.bottom-nav .active{
+  font-weight:bold;
 }
 
-.number-token{
-  display:inline-block;
-  white-space:nowrap;
-  margin:0 8px 10px;
+/* ③ページ 変換結果の表 */
+
+.result-table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+.result-table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.result-table th,
+.result-table td{
+  border:1px solid #e8edf2;
+  text-align:center;
+  padding:8px 6px;
+}
+
+.result-table th{
+  width:76px;
+  background:#fff8f8;
+  color:#d97486;
+  font-size:14px;
+}
+
+.result-table td{
+  font-size:18px;
+  font-weight:bold;
+  color:#3f4c5c;
+}
+
+.result-dot-grid{
+  width:28px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(2, 12px);
+  gap:1px;
+  justify-content:center;
+}
+
+.result-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#d9dee5;
+}
+
+.result-dot.active{
+  background:#39475c;
+  box-shadow:
+    inset 0 2px 2px rgba(255,255,255,0.2),
+    inset 0 -2px 3px rgba(0,0,0,0.35),
+    0 1px 2px rgba(0,0,0,0.15);
+}
+
+.result-dot-group{
+  display:flex;
+  gap:6px;
+  justify-content:center;
+  align-items:center;
 }
