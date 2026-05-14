@@ -156,13 +156,45 @@ function showTextOneByOne(elementId, text, speed = 70) {
     const span = document.createElement("span");
 
     span.className = "fade-letter";
-    span.textContent = text[i];
+
+    span.innerHTML =
+      text[i] === " "
+      ? "&nbsp;"
+      : text[i];
 
     box.appendChild(span);
 
     i++;
 
     if (i >= text.length) {
+      clearInterval(timer);
+    }
+
+  }, speed);
+}
+
+function showNumberGroupsOneByOne(elementId, items, speed = 120) {
+
+  const box = document.getElementById(elementId);
+
+  if (!box) return;
+
+  box.innerHTML = "";
+
+  let i = 0;
+
+  const timer = setInterval(() => {
+
+    const span = document.createElement("span");
+
+    span.className = "fade-letter number-token";
+    span.textContent = items[i];
+
+    box.appendChild(span);
+
+    i++;
+
+    if (i >= items.length) {
       clearInterval(timer);
     }
 
@@ -352,7 +384,7 @@ function hiraganaToBrailleNumber() {
     }
   }
 
-  showTextOneByOne("brailleNumberResult2", result.join(" "));
+ showNumberGroupsOneByOne("brailleNumberResult2", result);
 }
 
 /* ひらがな → 点字 */
